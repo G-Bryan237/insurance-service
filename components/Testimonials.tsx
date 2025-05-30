@@ -12,7 +12,7 @@ export function Testimonials() {
       name: "Sarah Johnson",
       position: "Business Owner",
       content: "Outstanding service! They helped me find the perfect insurance coverage for my business. The team was professional and made the process so easy.",
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b814?w=150&h=150&fit=crop&crop=face",
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face",
       rating: 5
     },
     {
