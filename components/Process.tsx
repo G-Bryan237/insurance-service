@@ -29,24 +29,24 @@ export function Process() {
   ];
 
   return (
-    <section className="py-4 bg-gray-50">
+    <section className="py-12 lg:py-20 bg-gray-50">
       <div className="container mx-auto px-4 max-w-7xl">
-        <div className="text-center mb-4">
+        <div className="text-center mb-8 lg:mb-16">
           <div className="flex items-center justify-center mb-4">
             <FaChevronRight className="w-3 h-3 text-blue-300 mr-0.5" />
             <FaChevronRight className="w-3 h-3 text-blue-400 mr-0.5" />
             <FaChevronRight className="w-3 h-3 text-blue-600 mr-1" />
-            <p className="text-blue-400 font-semibold">DEFAULT SUB TEXT</p>
+            <p className="text-blue-400 font-semibold text-sm lg:text-base">DEFAULT SUB TEXT</p>
             <FaChevronLeft className="w-3 h-3 text-blue-600 ml-1" />
             <FaChevronLeft className="w-3 h-3 text-blue-400 ml-0.5" />
             <FaChevronLeft className="w-3 h-3 text-blue-300 ml-0.5" />
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-            Our easy work process <br/>in 4 steps
+          <h2 className="text-2xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-4 lg:mb-6">
+            Our easy work process <br className="hidden lg:block"/>in 4 steps
           </h2>
         </div>
 
-        <div className="relative px-12 lg:px-20">
+        <div className="relative px-4 lg:px-12 xl:px-20">
           {/* Desktop wave layout */}
           <div className="hidden lg:block relative h-[200px]">
             {/* Wave path with dotted line */}
@@ -116,27 +116,27 @@ export function Process() {
           </div>
 
           {/* Mobile/tablet grid layout */}
-          <div className="grid md:grid-cols-2 lg:hidden gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:hidden gap-6 lg:gap-8">
             {steps.map((step, index) => (
               <div key={index} className="text-center group">
-                <div className="relative mb-8">
+                <div className="relative mb-6 lg:mb-8">
                   {/* Step number */}
-                  <div className="text-8xl font-bold text-blue-100 mb-4 group-hover:text-blue-200 transition-colors">
+                  <div className="text-6xl lg:text-8xl font-bold text-blue-100 mb-4 group-hover:text-blue-200 transition-colors">
                     {step.number}
                   </div>
                   
                   {/* Icon */}
-                  <div className="absolute top-6 left-1/2 transform -translate-x-1/2">
-                    <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center group-hover:bg-blue-700 transition-colors">
-                      <img src={step.image} alt={step.title} className="w-8 h-8" />
+                  <div className="absolute top-4 lg:top-6 left-1/2 transform -translate-x-1/2">
+                    <div className="w-12 h-12 lg:w-16 lg:h-16 bg-blue-600 rounded-full flex items-center justify-center group-hover:bg-blue-700 transition-colors">
+                      <img src={step.image} alt={step.title} className="w-6 h-6 lg:w-8 lg:h-8" />
                     </div>
                   </div>
                 </div>
 
-                <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
+                <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-3 lg:mb-4 group-hover:text-blue-600 transition-colors">
                   {step.title}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-gray-600 leading-relaxed text-sm lg:text-base">
                   {step.description}
                 </p>
               </div>
@@ -147,14 +147,14 @@ export function Process() {
           <div className="hidden lg:block h-[200px]"></div>
         </div>
 
-        <div className="flex items-center justify-center gap-6 -mt-4">
-          <div className="hidden md:flex items-center gap-3 bg-blue-50 px-4 py-2 rounded-lg border-l-4 border-blue-600">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 lg:gap-6 mt-8 lg:-mt-4">
+          <div className="hidden sm:flex items-center gap-3 bg-blue-50 px-4 py-2 rounded-lg border-l-4 border-blue-600">
             <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></div>
-            <p className="text-sm text-gray-700 font-medium">
+            <p className="text-xs lg:text-sm text-gray-700 font-medium">
               Don't hesitate, contact us for better future life
             </p>
           </div>
-          <button className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+          <button className="bg-blue-600 text-white px-6 lg:px-8 py-3 lg:py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors w-full sm:w-auto">
             Get a Quote
           </button>
         </div>

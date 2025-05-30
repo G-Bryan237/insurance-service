@@ -15,9 +15,114 @@ export function Quote() {
   ];
 
   return (
-    <section className="py-32 bg-gray-50 relative overflow-hidden">
+    <section className="py-16 lg:py-32 bg-gray-50 relative overflow-hidden">
       <div className="w-full relative z-10">
-        <div className="relative h-[600px]">
+        {/* Mobile Layout */}
+        <div className="lg:hidden container mx-auto px-4 max-w-7xl">
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center mb-4">
+              <FaChevronRight className="w-3 h-3 text-blue-300 mr-0.5" />
+              <FaChevronRight className="w-3 h-3 text-blue-400 mr-0.5" />
+              <FaChevronRight className="w-3 h-3 text-blue-600 mr-1" />
+              <p className="text-blue-600 font-semibold">FREE QUOTE</p>
+              <FaChevronLeft className="w-3 h-3 text-blue-600 ml-1" />
+              <FaChevronLeft className="w-3 h-3 text-blue-400 ml-0.5" />
+              <FaChevronLeft className="w-3 h-3 text-blue-300 ml-0.5" />
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">
+              Get an insurance quote to get started!
+            </h2>
+            <p className="text-gray-600 mb-6">
+              Quick and easy process to protect what matters most.
+            </p>
+          </div>
+
+          {/* Mobile Image */}
+          <div className="flex justify-center mb-8">
+            <div className="w-48 h-48 rounded-full overflow-hidden shadow-lg">
+              <img 
+                src="/quotes/img1.jpg" 
+                alt="Insurance Professional"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+
+          {/* Mobile Insurance Types */}
+          <div className="mb-8">
+            <div className="grid grid-cols-2 gap-3">
+              {tabs.map((tab, index) => (
+                <button
+                  key={index}
+                  className={`flex flex-col items-center p-4 rounded-lg border-2 transition-all duration-300 text-sm ${
+                    activeTab === index
+                      ? 'border-blue-500 bg-blue-50 text-blue-900'
+                      : 'border-gray-200 hover:border-gray-300 text-gray-600'
+                  }`}
+                  onClick={() => setActiveTab(index)}
+                >
+                  <tab.icon className={`w-6 h-6 mb-2 ${activeTab === index ? 'text-blue-500' : 'text-gray-600'}`} />
+                  <span className={`font-medium text-center ${activeTab === index ? 'text-blue-500' : 'text-gray-600'}`}>
+                    {tab.label}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Mobile Quote Form */}
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <div className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none text-sm"
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none text-sm"
+                />
+              </div>
+
+              <input
+                type="tel"
+                placeholder="Phone"
+                className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none text-sm"
+              />
+
+              <div>
+                <label className="block text-gray-700 font-medium mb-2 text-sm">
+                  Limits of Balance: $<span id="mobile-amount-display">25,000</span>
+                </label>
+                <input
+                  type="range"
+                  min="5000"
+                  max="100000"
+                  step="2500"
+                  defaultValue="25000"
+                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider"
+                  onChange={(e) => {
+                    const display = document.getElementById('mobile-amount-display');
+                    if (display) display.textContent = parseInt(e.target.value).toLocaleString();
+                  }}
+                />
+                <div className="flex justify-between text-xs text-gray-500 mt-1">
+                  <span>$5,000</span>
+                  <span>$100,000</span>
+                </div>
+              </div>
+
+              <button className="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors w-full">
+                Get Quote Now
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop Layout */}
+        <div className="hidden lg:block relative h-[600px]">
           {/* Left Blue Cylinder extending across */}
           <div className="absolute -left-16 top-0 w-2/5 h-full bg-blue-600 rounded-r-full flex items-center justify-end pr-4 z-10">
             {/* Decorative lines for blue section */}

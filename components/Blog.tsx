@@ -1,4 +1,5 @@
 import { Calendar, User, ArrowRight } from "lucide-react";
+import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import Link from "next/link";
 
 export function Blog() {
@@ -42,7 +43,15 @@ export function Blog() {
     <section id="blog" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="text-center mb-16">
-          <p className="text-blue-600 font-semibold mb-4">LATEST NEWS</p>
+          <div className="flex items-center justify-center mb-4">
+            <FaChevronRight className="w-3 h-3 text-blue-300 mr-0.5" />
+            <FaChevronRight className="w-3 h-3 text-blue-400 mr-0.5" />
+            <FaChevronRight className="w-3 h-3 text-blue-600 mr-1" />
+            <p className="text-blue-600 font-semibold">LATEST NEWS</p>
+            <FaChevronLeft className="w-3 h-3 text-blue-600 ml-1" />
+            <FaChevronLeft className="w-3 h-3 text-blue-400 ml-0.5" />
+            <FaChevronLeft className="w-3 h-3 text-blue-300 ml-0.5" />
+          </div>
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
             From our blog and news
           </h2>

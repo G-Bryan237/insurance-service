@@ -10,18 +10,18 @@ export function Brands() {
   return (
     <section className="py-20 bg-gray-50">
       <div className="container mx-auto px-4 max-w-7xl">
-        <div className="flex items-center justify-between">
-          <div>
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div className="text-center lg:text-left">
             <h2 className="text-base lg:text-lg font-semibold text-gray-700">
-              Trusted and funded by <br/> more than 800 companies
+              Trusted and funded by <br className="hidden lg:block" /> more than 800 companies
             </h2>
           </div>
 
           {/* Brand logos */}
-          <div className="flex items-center gap-10">
+          <div className="flex flex-wrap items-center justify-center lg:justify-end gap-6 lg:gap-10">
             {brands.map((brand, index) => (
               <div key={index} className="group cursor-pointer">
-                <div className="h-16 w-40 flex items-center justify-center">
+                <div className="h-12 w-24 lg:h-16 lg:w-40 flex items-center justify-center">
                   <img 
                     src={brand.logo} 
                     alt={brand.name}
