@@ -129,158 +129,159 @@ export function Testimonials() {
 
           {/* Right Content - Modern Testimonial Cards */}
           <div className="space-y-6">
-            {/* First Testimonial Card */}
-            <div className="relative bg-white rounded-2xl shadow-lg overflow-hidden">
-              {/* Abstract background pattern */}
-              <div className="absolute top-0 right-0 w-32 h-32 opacity-5">
-                <svg viewBox="0 0 100 100" className="w-full h-full text-blue-600">
-                  <circle cx="50" cy="50" r="30" fill="currentColor" opacity="0.3"/>
-                  <circle cx="70" cy="30" r="15" fill="currentColor" opacity="0.5"/>
-                  <circle cx="30" cy="70" r="20" fill="currentColor" opacity="0.4"/>
-                </svg>
-              </div>
-              
-              {/* Card content */}
-              <div className="p-6 pb-20">
-                <div className="flex items-center mb-4">
-                  <div className="flex space-x-1">
-                    {[...Array(testimonials[0].rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
-                    ))}
+            {/* First Testimonial Card - Left aligned */}
+            <div className="flex justify-start">
+              <div className="relative bg-white rounded-xl shadow-md overflow-hidden w-[420px] h-40">
+                {/* Card content with text on left, image on right */}
+                <div className="flex h-full">
+                  {/* Left side - Profile Image with stars */}
+                  <div className="w-32 h-full flex flex-col items-center justify-center p-3">
+                    {/* Stars above image */}
+                    <div className="flex space-x-1 mb-2">
+                      {[...Array(testimonials[0].rating)].map((_, i) => (
+                        <Star key={i} className="w-3 h-3 text-yellow-400 fill-current" />
+                      ))}
+                    </div>
+                    <div className="relative">
+                      <div className="w-24 h-24 rounded-full border-4 border-blue-100 overflow-hidden shadow-lg">
+                        <img
+                          src={testimonials[0].image}
+                          alt={testimonials[0].name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Right side - Text content with quote */}
+                  <div className="flex-1 p-4 pb-10 flex flex-col justify-center relative">
+                    <h3 className="text-sm font-bold text-gray-900 mb-1">
+                      {testimonials[0].name}
+                    </h3>
+                    
+                    <div className="flex items-start gap-2">
+                      <p className="text-gray-700 leading-relaxed text-xs flex-1">
+                        "{testimonials[0].content.substring(0, 80)}..."
+                      </p>
+                      {/* Quote icon at right of text */}
+                      <Quote className="w-4 h-4 text-blue-600 flex-shrink-0 mt-1" />
+                    </div>
                   </div>
                 </div>
                 
-                <h3 className="text-lg font-bold text-gray-900 mb-2">
-                  {testimonials[0].name}
-                </h3>
-                <p className="text-sm text-gray-600 mb-4">
-                  {testimonials[0].position}
-                </p>
-                
-                <p className="text-gray-700 leading-relaxed text-sm">
-                  "{testimonials[0].content}"
-                </p>
-              </div>
-              
-              {/* Blue footer with role */}
-              <div className="bg-blue-600 px-6 py-3">
-                <p className="text-white text-xs font-medium">
-                  {testimonials[0].position}
-                </p>
-              </div>
-              
-              {/* Profile photo overlapping bottom right */}
-              <div className="absolute -bottom-6 -right-6">
-                <div className="w-16 h-16 rounded-full border-4 border-white overflow-hidden shadow-lg">
-                  <img
-                    src={testimonials[0].image}
-                    alt={testimonials[0].name}
-                    className="w-full h-full object-cover"
-                  />
+                {/* Blue footer with status spanning full width */}
+                <div className="absolute bottom-0 left-0 right-0 bg-blue-600 px-4 py-2 hover:bg-blue-700 transition-colors duration-300 cursor-pointer">
+                  <p className="text-center text-white text-xs font-medium">
+                    {testimonials[0].position}
+                  </p>
                 </div>
+                
+                {/* White circle fitting exactly around the image */}
+                <div className="absolute left-16 top-[85px] transform -translate-y-1/2 -translate-x-1/2 w-24 h-24 rounded-full border-8 border-white shadow-lg pointer-events-none"></div>
               </div>
             </div>
 
-            {/* Second Testimonial Card */}
-            <div className="relative bg-white rounded-2xl shadow-lg overflow-hidden">
-              {/* Abstract background pattern */}
-              <div className="absolute top-0 left-0 w-28 h-28 opacity-5">
-                <svg viewBox="0 0 100 100" className="w-full h-full text-green-600">
-                  <rect x="20" y="20" width="25" height="25" fill="currentColor" opacity="0.4" rx="5"/>
-                  <rect x="55" y="35" width="20" height="20" fill="currentColor" opacity="0.6" rx="3"/>
-                  <rect x="35" y="55" width="30" height="15" fill="currentColor" opacity="0.3" rx="7"/>
-                </svg>
-              </div>
-              
-              {/* Card content */}
-              <div className="p-6 pb-20">
-                <div className="flex items-center mb-4">
-                  <div className="flex space-x-1">
-                    {[...Array(testimonials[1].rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
-                    ))}
+            {/* Second Testimonial Card - Right aligned */}
+            <div className="flex justify-end">
+              <div className="relative bg-white rounded-xl shadow-md overflow-hidden w-[420px] h-40">
+                {/* Card content with text on left, image on right */}
+                <div className="flex h-full">
+                  {/* Left side - Profile Image with stars */}
+                  <div className="w-32 h-full flex flex-col items-center justify-center p-3">
+                    {/* Stars above image */}
+                    <div className="flex space-x-1 mb-2">
+                      {[...Array(testimonials[1].rating)].map((_, i) => (
+                        <Star key={i} className="w-3 h-3 text-yellow-400 fill-current" />
+                      ))}
+                    </div>
+                    <div className="relative">
+                      <div className="w-24 h-24 rounded-full border-4 border-blue-100 overflow-hidden shadow-lg">
+                        <img
+                          src={testimonials[1].image}
+                          alt={testimonials[1].name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Right side - Text content with quote */}
+                  <div className="flex-1 p-4 pb-10 flex flex-col justify-center relative">
+                    <h3 className="text-sm font-bold text-gray-900 mb-1">
+                      {testimonials[1].name}
+                    </h3>
+                    
+                    <div className="flex items-start gap-2">
+                      <p className="text-gray-700 leading-relaxed text-xs flex-1">
+                        "{testimonials[1].content.substring(0, 80)}..."
+                      </p>
+                      {/* Quote icon at right of text */}
+                      <Quote className="w-4 h-4 text-blue-600 flex-shrink-0 mt-1" />
+                    </div>
                   </div>
                 </div>
                 
-                <h3 className="text-lg font-bold text-gray-900 mb-2">
-                  {testimonials[1].name}
-                </h3>
-                <p className="text-sm text-gray-600 mb-4">
-                  {testimonials[1].position}
-                </p>
-                
-                <p className="text-gray-700 leading-relaxed text-sm">
-                  "{testimonials[1].content}"
-                </p>
-              </div>
-              
-              {/* Blue footer with role */}
-              <div className="bg-blue-600 px-6 py-3">
-                <p className="text-white text-xs font-medium">
-                  {testimonials[1].position}
-                </p>
-              </div>
-              
-              {/* Profile photo overlapping bottom right */}
-              <div className="absolute -bottom-6 -right-6">
-                <div className="w-16 h-16 rounded-full border-4 border-white overflow-hidden shadow-lg">
-                  <img
-                    src={testimonials[1].image}
-                    alt={testimonials[1].name}
-                    className="w-full h-full object-cover"
-                  />
+                {/* Blue footer with status spanning full width */}
+                <div className="absolute bottom-0 left-0 right-0 bg-blue-600 px-4 py-2 hover:bg-blue-700 transition-colors duration-300 cursor-pointer">
+                  <p className="text-center text-white text-xs font-medium">
+                    {testimonials[1].position}
+                  </p>
                 </div>
+                
+                {/* White circle fitting exactly around the image */}
+                <div className="absolute left-16 top-[85px] transform -translate-y-1/2 -translate-x-1/2 w-24 h-24 rounded-full border-8 border-white shadow-lg pointer-events-none"></div>
               </div>
             </div>
 
-            {/* Third Testimonial Card */}
-            <div className="relative bg-white rounded-2xl shadow-lg overflow-hidden">
-              {/* Abstract background pattern */}
-              <div className="absolute top-0 right-0 w-24 h-24 opacity-5">
-                <svg viewBox="0 0 100 100" className="w-full h-full text-purple-600">
-                  <polygon points="50,10 90,90 10,90" fill="currentColor" opacity="0.4"/>
-                  <polygon points="30,30 60,30 45,60" fill="currentColor" opacity="0.6"/>
-                </svg>
-              </div>
-              
-              {/* Card content */}
-              <div className="p-6 pb-20">
-                <div className="flex items-center mb-4">
-                  <div className="flex space-x-1">
-                    {[...Array(testimonials[2].rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
-                    ))}
+            {/* Third Testimonial Card - Left aligned */}
+            <div className="flex justify-start">
+              <div className="relative bg-white rounded-xl shadow-md overflow-hidden w-[420px] h-40">
+                {/* Card content with text on left, image on right */}
+                <div className="flex h-full">
+                  {/* Left side - Profile Image with stars */}
+                  <div className="w-32 h-full flex flex-col items-center justify-center p-3">
+                    {/* Stars above image */}
+                    <div className="flex space-x-1 mb-2">
+                      {[...Array(testimonials[2].rating)].map((_, i) => (
+                        <Star key={i} className="w-3 h-3 text-yellow-400 fill-current" />
+                      ))}
+                    </div>
+                    <div className="relative">
+                      <div className="w-24 h-24 rounded-full border-4 border-blue-100 overflow-hidden shadow-lg">
+                        <img
+                          src={testimonials[2].image}
+                          alt={testimonials[2].name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Right side - Text content with quote */}
+                  <div className="flex-1 p-4 pb-10 flex flex-col justify-center relative">
+                    <h3 className="text-sm font-bold text-gray-900 mb-1">
+                      {testimonials[2].name}
+                    </h3>
+                    
+                    <div className="flex items-start gap-2">
+                      <p className="text-gray-700 leading-relaxed text-xs flex-1">
+                        "{testimonials[2].content.substring(0, 80)}..."
+                      </p>
+                      {/* Quote icon at right of text */}
+                      <Quote className="w-4 h-4 text-blue-600 flex-shrink-0 mt-1" />
+                    </div>
                   </div>
                 </div>
                 
-                <h3 className="text-lg font-bold text-gray-900 mb-2">
-                  {testimonials[2].name}
-                </h3>
-                <p className="text-sm text-gray-600 mb-4">
-                  {testimonials[2].position}
-                </p>
-                
-                <p className="text-gray-700 leading-relaxed text-sm">
-                  "{testimonials[2].content}"
-                </p>
-              </div>
-              
-              {/* Blue footer with role */}
-              <div className="bg-blue-600 px-6 py-3">
-                <p className="text-white text-xs font-medium">
-                  {testimonials[2].position}
-                </p>
-              </div>
-              
-              {/* Profile photo overlapping bottom right */}
-              <div className="absolute -bottom-6 -right-6">
-                <div className="w-16 h-16 rounded-full border-4 border-white overflow-hidden shadow-lg">
-                  <img
-                    src={testimonials[2].image}
-                    alt={testimonials[2].name}
-                    className="w-full h-full object-cover"
-                  />
+                {/* Blue footer with status spanning full width */}
+                <div className="absolute bottom-0 left-0 right-0 bg-blue-600 px-4 py-2 hover:bg-blue-700 transition-colors duration-300 cursor-pointer">
+                  <p className="text-center text-white text-xs font-medium">
+                    {testimonials[2].position}
+                  </p>
                 </div>
+                
+                {/* White circle fitting exactly around the image */}
+                <div className="absolute left-16 top-[85px] transform -translate-y-1/2 -translate-x-1/2 w-24 h-24 rounded-full border-8 border-white shadow-lg pointer-events-none"></div>
               </div>
             </div>
           </div>
