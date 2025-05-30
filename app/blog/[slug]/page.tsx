@@ -7,6 +7,7 @@ const blogPosts = {
   "choose-right-insurance-policy-family": {
     id: 1,
     title: "How to choose the right insurance policy for your family",
+    image: "https://images.unsplash.com/photo-1559526324-593bc073d938?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     content: `
       <p>Choosing the right insurance policy for your family is one of the most important financial decisions you'll make. With so many options available, it can feel overwhelming to determine which coverage best suits your family's unique needs.</p>
       
@@ -32,6 +33,7 @@ const blogPosts = {
   "understanding-auto-insurance-coverage": {
     id: 2,
     title: "Understanding auto insurance coverage options",
+    image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     content: `
       <p>Auto insurance can be complex, with various coverage types serving different purposes. Understanding these options helps you make informed decisions about protecting yourself and your vehicle.</p>
       
@@ -61,6 +63,7 @@ const blogPosts = {
   "home-insurance-natural-disasters": {
     id: 3,
     title: "Protecting your home from natural disasters",
+    image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     content: `
       <p>Natural disasters can cause devastating damage to your home. Understanding what your homeowner's insurance covers and what additional protection you might need is crucial for comprehensive protection.</p>
       
@@ -89,6 +92,7 @@ const blogPosts = {
   "health-insurance-open-enrollment": {
     id: 4,
     title: "Making the most of health insurance open enrollment",
+    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     content: `
       <p>Open enrollment is your annual opportunity to review and change your health insurance coverage. Making informed decisions during this period can save you money and ensure you have the right coverage.</p>
       
@@ -117,6 +121,7 @@ const blogPosts = {
   "small-business-insurance-essentials": {
     id: 5,
     title: "Small business insurance essentials every entrepreneur should know",
+    image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     content: `
       <p>Starting a business involves many risks, and proper insurance coverage is essential for protecting your investment, employees, and customers. Here's what every small business owner should know about business insurance.</p>
       
@@ -148,6 +153,7 @@ const blogPosts = {
   "travel-insurance-international-trips": {
     id: 6,
     title: "Why travel insurance is essential for international trips",
+    image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     content: `
       <p>International travel can be unpredictable, and medical emergencies or trip disruptions abroad can be costly. Travel insurance provides essential protection for international travelers.</p>
       
@@ -178,47 +184,127 @@ const blogPosts = {
 
 export default function BlogPost({ params }: { params: { slug: string } }) {
   const post = blogPosts[params.slug as keyof typeof blogPosts];
+  
+  // Get other posts (excluding current post)
+  const otherPosts = Object.entries(blogPosts)
+    .filter(([slug]) => slug !== params.slug)
+    .slice(0, 3)
+    .map(([slug, post]) => ({ ...post, slug }));
 
   if (!post) {
     return <div>Post not found</div>;
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white">
       <Navigation />
       
-      <article className="py-20">
+      <article className="py-12 lg:py-20">
         <div className="container mx-auto px-4 max-w-4xl">
-          <Link href="/blog" className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-700 mb-8">
+          {/* Back to Blog Link */}
+          <Link 
+            href="/blog" 
+            className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-700 transition-colors mb-8 lg:mb-12"
+          >
             <ArrowLeft className="w-4 h-4" />
-            <span>Back to Blog</span>
+            <span className="font-medium">Back to Blog</span>
           </Link>
 
-          <header className="mb-12">
-            <div className="mb-6">
-              <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
+          {/* Post Header */}
+          <header className="mb-8 lg:mb-12">
+            <div className="mb-4 lg:mb-6">
+              <span className="bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold">
                 {post.category}
               </span>
             </div>
             
-            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6 lg:mb-8">
               {post.title}
             </h1>
             
-            <div className="flex items-center space-x-6 text-gray-500">
-              <div className="flex items-center space-x-1">
+            <div className="flex flex-wrap items-center gap-4 lg:gap-6 text-sm text-gray-500 mb-6 lg:mb-8">
+              <div className="flex items-center space-x-2">
                 <Calendar className="w-4 h-4" />
                 <span>{post.date}</span>
               </div>
-              <div className="flex items-center space-x-1">
+              <div className="flex items-center space-x-2">
                 <User className="w-4 h-4" />
                 <span>{post.author}</span>
               </div>
-              <span>{post.readTime}</span>
+              <div className="bg-gray-100 px-2 py-1 rounded text-xs font-medium">
+                {post.readTime}
+              </div>
+            </div>
+
+            {/* Featured Image */}
+            <div className="aspect-video overflow-hidden rounded-2xl shadow-lg mb-8 lg:mb-12">
+              <img 
+                src={post.image} 
+                alt={post.title}
+                className="w-full h-full object-cover"
+              />
             </div>
           </header>
 
-          <div className="prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
+          {/* Post Content */}
+          <div className="prose prose-lg prose-gray max-w-none mb-16 lg:mb-20">
+            <div dangerouslySetInnerHTML={{ __html: post.content }} />
+          </div>
+
+          {/* Other Posts Section */}
+          <section className="border-t border-gray-200 pt-12 lg:pt-16">
+            <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-8 lg:mb-12">
+              Other Posts You Might Like
+            </h2>
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              {otherPosts.map((otherPost) => (
+                <Link key={otherPost.slug} href={`/blog/${otherPost.slug}`}>
+                  <article className="group cursor-pointer">
+                    <div className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-gray-100">
+                      <div className="relative overflow-hidden">
+                        <div className="aspect-[4/3] overflow-hidden">
+                          <img
+                            src={otherPost.image}
+                            alt={otherPost.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                          />
+                        </div>
+                        <div className="absolute top-3 left-3">
+                          <span className="bg-blue-600 text-white px-2 py-1 rounded-full text-xs font-medium">
+                            {otherPost.category}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="p-6">
+                        <div className="flex items-center space-x-3 text-xs text-gray-500 mb-3">
+                          <div className="flex items-center space-x-1">
+                            <Calendar className="w-3 h-3" />
+                            <span>{otherPost.date}</span>
+                          </div>
+                          <span>•</span>
+                          <span>{otherPost.readTime}</span>
+                        </div>
+
+                        <h3 className="text-lg font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
+                          {otherPost.title}
+                        </h3>
+
+                        <div className="flex items-center justify-between">
+                          <span className="text-blue-600 font-semibold text-sm">Read More</span>
+                          <div className="flex items-center space-x-1 text-xs text-gray-500">
+                            <User className="w-3 h-3" />
+                            <span>{otherPost.author}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                </Link>
+              ))}
+            </div>
+          </section>
         </div>
       </article>
 
