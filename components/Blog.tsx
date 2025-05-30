@@ -11,7 +11,8 @@ export function Blog() {
       date: "December 15, 2024",
       author: "John Smith",
       category: "Life Insurance",
-      readTime: "5 min read"
+      readTime: "5 min read",
+      image: "https://images.unsplash.com/photo-1609220136736-443140cffec6?w=600&h=400&fit=crop"
     },
     {
       id: 2,
@@ -21,7 +22,8 @@ export function Blog() {
       date: "December 12, 2024",
       author: "Sarah Johnson",
       category: "Auto Insurance",
-      readTime: "7 min read"
+      readTime: "7 min read",
+      image: "https://images.unsplash.com/photo-1502877338535-766e1452684a?w=600&h=400&fit=crop"
     },
     {
       id: 3,
@@ -31,7 +33,8 @@ export function Blog() {
       date: "December 10, 2024",
       author: "Mike Davis",
       category: "Home Insurance",
-      readTime: "6 min read"
+      readTime: "6 min read",
+      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=600&h=400&fit=crop"
     }
   ];
 
@@ -56,13 +59,12 @@ export function Blog() {
                 <div className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
                   {/* Blog image */}
                   <div className="relative overflow-hidden">
-                    <div className="aspect-[4/3] bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
-                      <span className="text-blue-600 font-semibold">Blog Image</span>
-                    </div>
-                    <div className="absolute top-4 left-4">
-                      <span className="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                        {post.category}
-                      </span>
+                    <div className="aspect-[4/3] bg-gradient-to-br from-blue-100 to-blue-200">
+                      <img 
+                        src={post.image} 
+                        alt={post.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
                     </div>
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
                   </div>
