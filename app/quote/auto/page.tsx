@@ -16,7 +16,6 @@ export default function AutoQuote() {
     vehicleVin: "",
     drivingHistory: "",
     currentInsurance: "",
-    coverageLevel: "full",
     firstName: "",
     lastName: "",
     dateOfBirth: "",
@@ -227,7 +226,13 @@ export default function AutoQuote() {
                     required
                   />
                 </div>
+              </div>
+            )}
 
+            {step === 3 && (
+              <div className="space-y-6">
+                <h2 className="text-xl font-semibold mb-4">Additional Information</h2>
+                
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Driving History *
@@ -261,64 +266,6 @@ export default function AutoQuote() {
                     <option value="switching">Switching from another provider</option>
                     <option value="adding">Adding vehicle to existing policy</option>
                   </select>
-                </div>
-              </div>
-            )}
-
-            {step === 3 && (
-              <div className="space-y-6">
-                <h2 className="text-xl font-semibold mb-4">Coverage Preferences</h2>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">
-                    Coverage Level *
-                  </label>
-                  <div className="space-y-3">
-                    <label className="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:border-blue-500">
-                      <input
-                        type="radio"
-                        name="coverageLevel"
-                        value="basic"
-                        checked={formData.coverageLevel === "basic"}
-                        onChange={handleInputChange}
-                        className="mr-3"
-                      />
-                      <div>
-                        <div className="font-medium">Basic Coverage</div>
-                        <div className="text-sm text-gray-600">Liability only - meets minimum state requirements</div>
-                      </div>
-                    </label>
-                    
-                    <label className="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:border-blue-500">
-                      <input
-                        type="radio"
-                        name="coverageLevel"
-                        value="standard"
-                        checked={formData.coverageLevel === "standard"}
-                        onChange={handleInputChange}
-                        className="mr-3"
-                      />
-                      <div>
-                        <div className="font-medium">Standard Coverage</div>
-                        <div className="text-sm text-gray-600">Includes collision and comprehensive with moderate deductibles</div>
-                      </div>
-                    </label>
-                    
-                    <label className="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:border-blue-500">
-                      <input
-                        type="radio"
-                        name="coverageLevel"
-                        value="full"
-                        checked={formData.coverageLevel === "full"}
-                        onChange={handleInputChange}
-                        className="mr-3"
-                      />
-                      <div>
-                        <div className="font-medium">Full Coverage</div>
-                        <div className="text-sm text-gray-600">Maximum protection with low deductibles and additional benefits</div>
-                      </div>
-                    </label>
-                  </div>
                 </div>
               </div>
             )}

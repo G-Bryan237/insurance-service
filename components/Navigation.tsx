@@ -108,9 +108,11 @@ export function Navigation() {
 
             {/* CTA Button */}
             <div className="hidden lg:block">
-              <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium">
-                Get a Quote
-              </button>
+              <Link href="/agent">
+                <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium">
+                  Get a Quote
+                </button>
+              </Link>
             </div>
 
             {/* Mobile menu button */}
@@ -127,36 +129,13 @@ export function Navigation() {
             <div className="lg:hidden pb-4">
               <div className="flex flex-col space-y-4">
                 <Link href="/" className="text-gray-700 hover:text-blue-600 font-medium text-left">Home</Link>
+                <Link href="/services" className="text-gray-700 hover:text-blue-600 font-medium text-left">Services</Link>
                 <Link href="/about" className="text-gray-700 hover:text-blue-600 font-medium text-left">About</Link>
-                
-                {/* Mobile Services */}
-                <div>
-                  <Link href="/services" className="text-gray-700 hover:text-blue-600 font-medium block mb-2 text-left">Services</Link>
-                  <div className="ml-4 space-y-2">
-                    {serviceItems.map((item, index) => (
-                      <Link key={index} href={item.href} className="text-gray-600 hover:text-blue-600 text-sm block text-left">
-                        {item.name}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Mobile Blog */}
-                <div>
-                  <Link href="/blog" className="text-gray-700 hover:text-blue-600 font-medium block mb-2 text-left">Blog</Link>
-                  <div className="ml-4 space-y-2">
-                    {blogItems.map((item, index) => (
-                      <Link key={index} href={item.href} className="text-gray-600 hover:text-blue-600 text-sm block text-left">
-                        {item.name}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-
+                <Link href="/blog" className="text-gray-700 hover:text-blue-600 font-medium text-left">Blog</Link>
                 <Link href="/contact" className="text-gray-700 hover:text-blue-600 font-medium text-left">Contact</Link>
-                <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium w-full">
+                <Link href="/agent" className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-medium text-center">
                   Get a Quote
-                </button>
+                </Link>
               </div>
             </div>
           )}

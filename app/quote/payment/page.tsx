@@ -1,24 +1,18 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { CreditCard, ArrowLeft, Shield, Lock } from "lucide-react";
 import Link from "next/link";
 
 export default function Payment() {
+  const router = useRouter();
   const [selectedPlan, setSelectedPlan] = useState<any>(null);
   const [applicationData, setApplicationData] = useState<any>(null);
   const [paymentData, setPaymentData] = useState({
-    cardNumber: "",
-    expiryDate: "",
-    cvv: "",
-    cardName: "",
-    billingAddress: "",
-    billingCity: "",
-    billingState: "",
-    billingZip: "",
-    paymentMethod: "credit",
+    paymentMethod: "",
     billingCycle: "monthly"
   });
 
@@ -29,6 +23,9 @@ export default function Payment() {
     
     if (planData) setSelectedPlan(JSON.parse(decodeURIComponent(planData)));
     if (appData) setApplicationData(JSON.parse(decodeURIComponent(appData)));
+    
+    // Store the current payment URL for agent page return navigation
+    sessionStorage.setItem('paymentPageUrl', window.location.href);
   }, []);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -40,8 +37,10 @@ export default function Payment() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Process payment and navigate to confirmation
-    window.location.href = '/quote/confirmation';
+    // Store current payment URL in sessionStorage before navigating
+    sessionStorage.setItem('paymentPageUrl', window.location.href);
+    // Process payment and navigate to agent page
+    router.push('/agent');
   };
 
   if (!selectedPlan || !applicationData) {
@@ -83,7 +82,7 @@ export default function Payment() {
                     <label className="block text-sm font-medium text-gray-700 mb-3">
                       Billing Cycle
                     </label>
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <label className="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:border-blue-500">
                         <input
                           type="radio"
@@ -124,172 +123,265 @@ export default function Payment() {
                     <label className="block text-sm font-medium text-gray-700 mb-3">
                       Payment Method
                     </label>
-                    <div className="grid grid-cols-2 gap-4">
-                      <label className="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:border-blue-500">
-                        <input
-                          type="radio"
-                          name="paymentMethod"
-                          value="credit"
-                          checked={paymentData.paymentMethod === "credit"}
-                          onChange={handleInputChange}
-                          className="mr-3"
-                        />
-                        <div>
-                          <div className="font-medium">Credit/Debit Card</div>
-                          <div className="text-sm text-gray-600">Visa, Mastercard, American Express</div>
-                        </div>
-                      </label>
-                      
-                      <label className="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:border-blue-500">
-                        <input
-                          type="radio"
-                          name="paymentMethod"
-                          value="ach"
-                          checked={paymentData.paymentMethod === "ach"}
-                          onChange={handleInputChange}
-                          className="mr-3"
-                        />
-                        <div>
-                          <div className="font-medium">Bank Account (ACH)</div>
-                          <div className="text-sm text-gray-600">Direct bank transfer</div>
-                        </div>
-                      </label>
-                    </div>
+                    <select
+                      name="paymentMethod"
+                      value={paymentData.paymentMethod}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none text-lg"
+                      required
+                    >
+                      <option value="">Select Payment Method</option>
+                      <option value="cashapp">Cash App</option>
+                      <option value="venmo">Venmo</option>
+                      <option value="paypal">PayPal</option>
+                      <option value="zelle">Zelle</option>
+                      <option value="ach">Bank Account (ACH)</option>
+                      <option value="applepay">Apple Pay</option>
+                      <option value="googlepay">Google Pay</option>
+                      <option value="bitcoin">Bitcoin</option>
+                      <option value="ethereum">Ethereum</option>
+                    </select>
                   </div>
 
-                  {paymentData.paymentMethod === "credit" && (
-                    <>
-                      {/* Card Information */}
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Card Number *
-                        </label>
-                        <input
-                          type="text"
-                          name="cardNumber"
-                          value={paymentData.cardNumber}
-                          onChange={handleInputChange}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
-                          placeholder="1234 5678 9012 3456"
-                          required
-                        />
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Expiry Date *
-                          </label>
-                          <input
-                            type="text"
-                            name="expiryDate"
-                            value={paymentData.expiryDate}
-                            onChange={handleInputChange}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
-                            placeholder="MM/YY"
-                            required
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            CVV *
-                          </label>
-                          <input
-                            type="text"
-                            name="cvv"
-                            value={paymentData.cvv}
-                            onChange={handleInputChange}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
-                            placeholder="123"
-                            required
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Cardholder Name *
-                        </label>
-                        <input
-                          type="text"
-                          name="cardName"
-                          value={paymentData.cardName}
-                          onChange={handleInputChange}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
-                          placeholder="Name as it appears on card"
-                          required
-                        />
-                      </div>
-                    </>
-                  )}
-
-                  {/* Billing Address */}
-                  <div>
-                    <h3 className="text-lg font-semibold mb-4">Billing Address</h3>
-                    
+                  {/* Dynamic Payment Input Fields */}
+                  {paymentData.paymentMethod && paymentData.paymentMethod !== "" && (
                     <div className="space-y-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">
-                          Street Address *
-                        </label>
-                        <input
-                          type="text"
-                          name="billingAddress"
-                          value={paymentData.billingAddress}
-                          onChange={handleInputChange}
-                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
-                          required
-                        />
-                      </div>
+                      <h3 className="text-lg font-semibold text-gray-900">
+                        {paymentData.paymentMethod === "cashapp" && "Cash App Payment Details"}
+                        {paymentData.paymentMethod === "venmo" && "Venmo Payment Details"}
+                        {paymentData.paymentMethod === "paypal" && "PayPal Payment Details"}
+                        {paymentData.paymentMethod === "zelle" && "Zelle Payment Details"}
+                        {paymentData.paymentMethod === "ach" && "Bank Account Details"}
+                        {paymentData.paymentMethod === "applepay" && "Apple Pay Details"}
+                        {paymentData.paymentMethod === "googlepay" && "Google Pay Details"}
+                        {paymentData.paymentMethod === "bitcoin" && "Bitcoin Payment Details"}
+                        {paymentData.paymentMethod === "ethereum" && "Ethereum Payment Details"}
+                      </h3>
 
-                      <div className="grid grid-cols-3 gap-4">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            City *
-                          </label>
-                          <input
-                            type="text"
-                            name="billingCity"
-                            value={paymentData.billingCity}
-                            onChange={handleInputChange}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
-                            required
-                          />
+                      {/* Cash App */}
+                      {paymentData.paymentMethod === "cashapp" && (
+                        <div className="bg-green-50 p-6 rounded-lg border border-green-200">
+                          <div className="space-y-4">
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Cash App Username or Email *
+                              </label>
+                              <input
+                                type="text"
+                                name="cashappId"
+                                className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:border-green-500 focus:outline-none"
+                                placeholder="$username or email@example.com"
+                                required
+                              />
+                            </div>
+                            <div className="text-sm text-gray-600">
+                              <p>• Enter your Cash App username (starting with $) or email address</p>
+                              <p>• Payment will be processed through Cash App's secure system</p>
+                            </div>
+                          </div>
                         </div>
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            State *
-                          </label>
-                          <select
-                            name="billingState"
-                            value={paymentData.billingState}
-                            onChange={handleInputChange}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
-                            required
-                          >
-                            <option value="">Select</option>
-                            <option value="CA">CA</option>
-                            <option value="TX">TX</option>
-                            <option value="FL">FL</option>
-                            <option value="NY">NY</option>
-                          </select>
+                      )}
+
+                      {/* Venmo */}
+                      {paymentData.paymentMethod === "venmo" && (
+                        <div className="bg-blue-50 p-6 rounded-lg border border-blue-200">
+                          <div className="space-y-4">
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Venmo Username or Phone Number *
+                              </label>
+                              <input
+                                type="text"
+                                name="venmoId"
+                                className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                                placeholder="@username or phone number"
+                                required
+                              />
+                            </div>
+                            <div className="text-sm text-gray-600">
+                              <p>• Enter your Venmo username (starting with @) or phone number</p>
+                              <p>• We'll send you a payment request through Venmo</p>
+                            </div>
+                          </div>
                         </div>
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            ZIP Code *
-                          </label>
-                          <input
-                            type="text"
-                            name="billingZip"
-                            value={paymentData.billingZip}
-                            onChange={handleInputChange}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
-                            required
-                          />
+                      )}
+
+                      {/* PayPal */}
+                      {paymentData.paymentMethod === "paypal" && (
+                        <div className="bg-yellow-50 p-6 rounded-lg border border-yellow-200">
+                          <div className="space-y-4">
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                PayPal Email Address *
+                              </label>
+                              <input
+                                type="email"
+                                name="paypalEmail"
+                                className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:border-yellow-500 focus:outline-none"
+                                placeholder="your-paypal@email.com"
+                                required
+                              />
+                            </div>
+                            <div className="text-sm text-gray-600">
+                              <p>• Enter the email address associated with your PayPal account</p>
+                              <p>• You'll be redirected to PayPal to complete the payment</p>
+                            </div>
+                          </div>
                         </div>
-                      </div>
+                      )}
+
+                      {/* Zelle */}
+                      {paymentData.paymentMethod === "zelle" && (
+                        <div className="bg-purple-50 p-6 rounded-lg border border-purple-200">
+                          <div className="space-y-4">
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Zelle Email or Phone Number *
+                              </label>
+                              <input
+                                type="text"
+                                name="zelleId"
+                                className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none"
+                                placeholder="email@example.com or (555) 123-4567"
+                                required
+                              />
+                            </div>
+                            <div className="text-sm text-gray-600">
+                              <p>• Enter your Zelle-enrolled email or phone number</p>
+                              <p>• Payment will be processed through your bank's Zelle service</p>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Bank Account (ACH) */}
+                      {paymentData.paymentMethod === "ach" && (
+                        <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                          <div className="space-y-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                              <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                  Account Number *
+                                </label>
+                                <input
+                                  type="text"
+                                  name="accountNumber"
+                                  className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                                  placeholder="Account number"
+                                  required
+                                />
+                              </div>
+                              <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                  Routing Number *
+                                </label>
+                                <input
+                                  type="text"
+                                  name="routingNumber"
+                                  className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                                  placeholder="9-digit routing number"
+                                  maxLength={9}
+                                  required
+                                />
+                              </div>
+                            </div>
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Account Type *
+                              </label>
+                              <select
+                                name="accountType"
+                                className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                                required
+                              >
+                                <option value="">Select account type</option>
+                                <option value="checking">Checking</option>
+                                <option value="savings">Savings</option>
+                              </select>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Apple Pay */}
+                      {paymentData.paymentMethod === "applepay" && (
+                        <div className="bg-gray-900 text-white p-6 rounded-lg">
+                          <div className="text-center space-y-4">
+                            <div className="text-lg font-semibold">Apple Pay</div>
+                            <p className="text-sm text-gray-300">
+                              Use Touch ID, Face ID, or your device passcode to pay securely
+                            </p>
+                            <div className="bg-white text-black px-6 py-3 rounded-lg inline-flex items-center space-x-2">
+                              <span className="text-sm font-medium">🍎 Pay</span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Google Pay */}
+                      {paymentData.paymentMethod === "googlepay" && (
+                        <div className="bg-blue-600 text-white p-6 rounded-lg">
+                          <div className="text-center space-y-4">
+                            <div className="text-lg font-semibold">Google Pay</div>
+                            <p className="text-sm text-blue-100">
+                              Pay quickly and securely with Google Pay
+                            </p>
+                            <div className="bg-white text-blue-600 px-6 py-3 rounded-lg inline-flex items-center space-x-2">
+                              <span className="text-sm font-medium">G Pay</span>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Bitcoin */}
+                      {paymentData.paymentMethod === "bitcoin" && (
+                        <div className="bg-orange-50 p-6 rounded-lg border border-orange-200">
+                          <div className="space-y-4">
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Bitcoin Wallet Address *
+                              </label>
+                              <input
+                                type="text"
+                                name="bitcoinAddress"
+                                className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:border-orange-500 focus:outline-none font-mono text-sm"
+                                placeholder="bc1qxy2kgdygjrsqtzq2n0yrf2493p83kkfjhx0wlh"
+                                required
+                              />
+                            </div>
+                            <div className="text-sm text-gray-600">
+                              <p>• Enter your Bitcoin wallet address for payment verification</p>
+                              <p>• Transaction will be processed on the Bitcoin network</p>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {/* Ethereum */}
+                      {paymentData.paymentMethod === "ethereum" && (
+                        <div className="bg-indigo-50 p-6 rounded-lg border border-indigo-200">
+                          <div className="space-y-4">
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Ethereum Wallet Address *
+                              </label>
+                              <input
+                                type="text"
+                                name="ethereumAddress"
+                                className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none font-mono text-sm"
+                                placeholder="0x742d35Cc6734C0532925a3b8D23AD16C..."
+                                required
+                              />
+                            </div>
+                            <div className="text-sm text-gray-600">
+                              <p>• Enter your Ethereum wallet address for payment verification</p>
+                              <p>• Transaction will be processed on the Ethereum network</p>
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
-                  </div>
+                  )}
 
                   {/* Security Notice */}
                   <div className="bg-gray-50 p-4 rounded-lg flex items-start space-x-3">

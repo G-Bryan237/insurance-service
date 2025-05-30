@@ -16,7 +16,6 @@ export default function TravelQuote() {
     returnDate: "",
     travelers: "1",
     tripCost: "",
-    coverage: "standard",
     firstName: "",
     lastName: "",
     dateOfBirth: "",
@@ -27,7 +26,7 @@ export default function TravelQuote() {
     travelFrequency: ""
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
@@ -314,6 +313,26 @@ export default function TravelQuote() {
                     />
                   </div>
                 </div>
+              </div>
+            )}
+
+            {step === 3 && (
+              <div className="space-y-6">
+                <h2 className="text-xl font-semibold mb-4">Additional Information</h2>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Medical Conditions
+                  </label>
+                  <textarea
+                    name="medicalConditions"
+                    value={formData.medicalConditions}
+                    onChange={handleInputChange}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                    placeholder="List any pre-existing medical conditions"
+                    rows={3}
+                  />
+                </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -326,115 +345,11 @@ export default function TravelQuote() {
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
                   >
                     <option value="">Select frequency</option>
-                    <option value="rarely">Rarely (once a year or less)</option>
-                    <option value="occasional">Occasional (2-3 times per year)</option>
-                    <option value="frequent">Frequent (4+ times per year)</option>
-                    <option value="business">Business traveler</option>
+                    <option value="rare">Rarely travel</option>
+                    <option value="occasional">1-2 trips per year</option>
+                    <option value="frequent">3-5 trips per year</option>
+                    <option value="very-frequent">More than 5 trips per year</option>
                   </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Pre-existing Medical Conditions
-                  </label>
-                  <select
-                    name="medicalConditions"
-                    value={formData.medicalConditions}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
-                  >
-                    <option value="">Select option</option>
-                    <option value="none">No medical conditions</option>
-                    <option value="minor">Minor conditions (controlled)</option>
-                    <option value="major">Major conditions</option>
-                    <option value="prefer-not-say">Prefer not to say</option>
-                  </select>
-                </div>
-              </div>
-            )}
-
-            {step === 3 && (
-              <div className="space-y-6">
-                <h2 className="text-xl font-semibold mb-4">Coverage Options</h2>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">
-                    Coverage Level *
-                  </label>
-                  <div className="space-y-3">
-                    <label className="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:border-blue-500">
-                      <input
-                        type="radio"
-                        name="coverage"
-                        value="basic"
-                        checked={formData.coverage === "basic"}
-                        onChange={handleInputChange}
-                        className="mr-3"
-                      />
-                      <div>
-                        <div className="font-medium">Basic Coverage</div>
-                        <div className="text-sm text-gray-600">Trip cancellation and basic medical coverage</div>
-                      </div>
-                    </label>
-                    
-                    <label className="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:border-blue-500">
-                      <input
-                        type="radio"
-                        name="coverage"
-                        value="standard"
-                        checked={formData.coverage === "standard"}
-                        onChange={handleInputChange}
-                        className="mr-3"
-                      />
-                      <div>
-                        <div className="font-medium">Standard Coverage</div>
-                        <div className="text-sm text-gray-600">Comprehensive protection including baggage and delays</div>
-                      </div>
-                    </label>
-                    
-                    <label className="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:border-blue-500">
-                      <input
-                        type="radio"
-                        name="coverage"
-                        value="premium"
-                        checked={formData.coverage === "premium"}
-                        onChange={handleInputChange}
-                        className="mr-3"
-                      />
-                      <div>
-                        <div className="font-medium">Premium Coverage</div>
-                        <div className="text-sm text-gray-600">Maximum protection with cancel for any reason</div>
-                      </div>
-                    </label>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">
-                    Planned Activities (check all that apply)
-                  </label>
-                  <div className="space-y-3">
-                    {[
-                      { value: "adventure-sports", label: "Adventure Sports", desc: "Skiing, snowboarding, mountain climbing" },
-                      { value: "water-sports", label: "Water Sports", desc: "Scuba diving, surfing, jet skiing" },
-                      { value: "extreme-sports", label: "Extreme Sports", desc: "Bungee jumping, skydiving, base jumping" },
-                      { value: "business", label: "Business Activities", desc: "Work-related travel and meetings" },
-                      { value: "leisure", label: "Leisure Only", desc: "Sightseeing, dining, relaxation" }
-                    ].map((activity) => (
-                      <label key={activity.value} className="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:border-blue-500">
-                        <input
-                          type="checkbox"
-                          checked={formData.activities.includes(activity.value)}
-                          onChange={() => handleActivityChange(activity.value)}
-                          className="mr-3"
-                        />
-                        <div>
-                          <div className="font-medium">{activity.label}</div>
-                          <div className="text-sm text-gray-600">{activity.desc}</div>
-                        </div>
-                      </label>
-                    ))}
-                  </div>
                 </div>
               </div>
             )}

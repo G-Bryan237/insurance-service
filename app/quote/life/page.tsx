@@ -10,7 +10,6 @@ export default function LifeQuote() {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     zipCode: "",
-    coverage: "term",
     coverageAmount: "",
     age: "",
     gender: "",
@@ -92,43 +91,6 @@ export default function LifeQuote() {
                     placeholder="Enter your ZIP code"
                     required
                   />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-3">
-                    Type of Coverage *
-                  </label>
-                  <div className="space-y-3">
-                    <label className="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:border-blue-500">
-                      <input
-                        type="radio"
-                        name="coverage"
-                        value="term"
-                        checked={formData.coverage === "term"}
-                        onChange={handleInputChange}
-                        className="mr-3"
-                      />
-                      <div>
-                        <div className="font-medium">Term Life Insurance</div>
-                        <div className="text-sm text-gray-600">Affordable coverage for a specific period</div>
-                      </div>
-                    </label>
-                    
-                    <label className="flex items-center p-4 border border-gray-300 rounded-lg cursor-pointer hover:border-blue-500">
-                      <input
-                        type="radio"
-                        name="coverage"
-                        value="whole"
-                        checked={formData.coverage === "whole"}
-                        onChange={handleInputChange}
-                        className="mr-3"
-                      />
-                      <div>
-                        <div className="font-medium">Whole Life Insurance</div>
-                        <div className="text-sm text-gray-600">Permanent coverage with cash value</div>
-                      </div>
-                    </label>
-                  </div>
                 </div>
 
                 <div>

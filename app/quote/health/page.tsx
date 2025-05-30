@@ -11,8 +11,6 @@ export default function HealthQuote() {
   const [formData, setFormData] = useState({
     zipCode: "",
     planType: "individual",
-    coverage: "standard",
-    deductible: "medium",
     firstName: "",
     lastName: "",
     dateOfBirth: "",
@@ -130,41 +128,6 @@ export default function HealthQuote() {
                       </div>
                     </label>
                   </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Coverage Level *
-                  </label>
-                  <select
-                    name="coverage"
-                    value={formData.coverage}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
-                    required
-                  >
-                    <option value="bronze">Bronze - Basic coverage</option>
-                    <option value="silver">Silver - Standard coverage</option>
-                    <option value="gold">Gold - Enhanced coverage</option>
-                    <option value="platinum">Platinum - Premium coverage</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Preferred Deductible *
-                  </label>
-                  <select
-                    name="deductible"
-                    value={formData.deductible}
-                    onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
-                    required
-                  >
-                    <option value="low">Low ($500-$1,000)</option>
-                    <option value="medium">Medium ($1,500-$3,000)</option>
-                    <option value="high">High ($5,000+)</option>
-                  </select>
                 </div>
               </div>
             )}

@@ -15,7 +15,6 @@ export default function HomeQuote() {
     squareFootage: "",
     homeValue: "",
     mortgageStatus: "",
-    coverageLevel: "standard",
     firstName: "",
     lastName: "",
     address: "",
@@ -283,60 +282,8 @@ export default function HomeQuote() {
 
             {step === 3 && (
               <div className="space-y-6">
-                <h2 className="text-xl font-semibold mb-4">Coverage Options</h2>
+                <h2 className="text-xl font-semibold mb-4">Additional Information</h2>
                 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Coverage Level *
-                  </label>
-                  <div className="space-y-3">
-                    <label className="flex items-center">
-                      <input
-                        type="radio"
-                        name="coverageLevel"
-                        value="basic"
-                        checked={formData.coverageLevel === "basic"}
-                        onChange={handleInputChange}
-                        className="mr-3"
-                      />
-                      <div>
-                        <span className="font-medium">Basic Coverage</span>
-                        <p className="text-sm text-gray-600">Essential protection at affordable rates</p>
-                      </div>
-                    </label>
-                    
-                    <label className="flex items-center">
-                      <input
-                        type="radio"
-                        name="coverageLevel"
-                        value="standard"
-                        checked={formData.coverageLevel === "standard"}
-                        onChange={handleInputChange}
-                        className="mr-3"
-                      />
-                      <div>
-                        <span className="font-medium">Standard Coverage</span>
-                        <p className="text-sm text-gray-600">Comprehensive protection for most homeowners</p>
-                      </div>
-                    </label>
-                    
-                    <label className="flex items-center">
-                      <input
-                        type="radio"
-                        name="coverageLevel"
-                        value="premium"
-                        checked={formData.coverageLevel === "premium"}
-                        onChange={handleInputChange}
-                        className="mr-3"
-                      />
-                      <div>
-                        <span className="font-medium">Premium Coverage</span>
-                        <p className="text-sm text-gray-600">Maximum protection with additional benefits</p>
-                      </div>
-                    </label>
-                  </div>
-                </div>
-
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Previous Claims History
