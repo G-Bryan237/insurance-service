@@ -68,17 +68,17 @@ export function Footer() {
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-yellow-400 flex-shrink-0" />
-                <span className="text-blue-200">+92 (003) 68-090</span>
+                <span className="text-blue-200">+XX (XXX) XX-XXX</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="w-5 h-5 text-yellow-400 flex-shrink-0" />
-                <span className="text-blue-200">needhelp@company.com</span>
+                <span className="text-blue-200">info@company.com</span>
               </div>
               <div className="flex items-start space-x-3">
                 <MapPin className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-1" />
                 <span className="text-blue-200">
-                  30 Commercial Road<br />
-                  Fratton, Australia
+                  XXX Commercial Road<br />
+                  City, Country
                 </span>
               </div>
             </div>
