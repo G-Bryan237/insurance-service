@@ -3,21 +3,21 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { Calendar, User, ArrowLeft } from "lucide-react";
 import Link from "next/link";
+import { use } from "react"; // ⬅️ unwraps Promise props in Server Components
 
-// 1) Strong model type for posts
+// Strong model type for posts
 type BlogPost = {
   id: number;
   title: string;
   image: string;
-  content: string;
+  content: string; // HTML string
   date: string;
   author: string;
   category: string;
   readTime: string;
 };
 
-// 2) Type the collection as a Record<string, BlogPost>
-//    (prevents 'never' and lets spreads work)
+// Your data (unchanged)
 const blogPosts: Record<string, BlogPost> = {
   "choose-right-insurance-policy-family": {
     id: 1,
@@ -178,18 +178,20 @@ const blogPosts: Record<string, BlogPost> = {
   },
 };
 
-export default function BlogPost({ params }: { params: { slug: string } }) {
-  const post = blogPosts[params.slug as keyof typeof blogPosts];
-  
-  // Get other posts (excluding current post)
-  const otherPosts = Object.entries(blogPosts)
-    .filter(([slug]) => slug !== params.slug)
-    .slice(0, 3)
-    .map(([s, p]) => ({ ...p, slug: s })); // p is BlogPost, so spread is fine
+type Params = { slug: string };
+type PageProps = { params: Promise<Params> }; // ⬅️ Next 15: params is a Promise
 
-  if (!post) {
-    return <div>Post not found</div>;
-  }
+export default function Page({ params }: PageProps) {
+  const { slug } = use(params); // ⬅️ no async/await needed
+  const post = blogPosts[slug];
+
+  const entries = Object.entries(blogPosts) as [string, BlogPost][];
+  const otherPosts = entries
+    .filter(([s]) => s !== slug)
+    .slice(0, 3)
+    .map(([s, p]) => ({ ...p, slug: s }));
+
+  if (!post) return <div>Post not found</div>;
 
   return (
     <div className="min-h-screen bg-white">
@@ -309,4 +311,14 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
       <Footer />
     </div>
   );
+}
+
+// Optional: keep metadata sync by using use()
+export function generateMetadata({ params }: PageProps) {
+  const { slug } = use(params);
+  const post = blogPosts[slug];
+  return {
+    title: post ? post.title : "Blog",
+    description: post ? `${post.title} – ${post.category}` : "Blog post",
+  };
 }
