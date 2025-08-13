@@ -178,20 +178,12 @@ const blogPosts: Record<string, BlogPost> = {
   },
 };
 
-// 3) Next 15 page prop typing: params is a Promise
-type Params = { slug: string };
-type PageProps = { params: Params };
-
-export default function BlogPost({ params }: PageProps) {
-  const { slug } = params;
-
-  // 4) Post is BlogPost | undefined (safe indexing)
-  const post = blogPosts[slug];
-
-  // 5) Entries typed => spread works
-  const entries = Object.entries(blogPosts) as [string, BlogPost][];
-  const otherPosts = entries
-    .filter(([s]) => s !== slug)
+export default function BlogPost({ params }: { params: { slug: string } }) {
+  const post = blogPosts[params.slug as keyof typeof blogPosts];
+  
+  // Get other posts (excluding current post)
+  const otherPosts = Object.entries(blogPosts)
+    .filter(([slug]) => slug !== params.slug)
     .slice(0, 3)
     .map(([s, p]) => ({ ...p, slug: s })); // p is BlogPost, so spread is fine
 
