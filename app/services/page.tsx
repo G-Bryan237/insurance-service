@@ -170,30 +170,30 @@ export default function AllServices() {
 						</p>
 					</div>
 
-					<div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+					<div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
 						{services.map((service) => (
 							<Link key={service.id} href={`/services/${service.slug}`}>
 								<div className="group cursor-pointer h-full">
-									<div className="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:border-blue-500 h-full flex flex-col">
-										<div className="bg-blue-500 group-hover:bg-blue-600 w-12 h-12 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-all duration-300">
-											<service.icon className="w-6 h-6 text-white" />
+									<div className="bg-gray-800 border border-gray-700 rounded-xl p-4 md:p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 hover:border-blue-500 h-full flex flex-col">
+										<div className="bg-blue-500 group-hover:bg-blue-600 w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center mb-3 md:mb-4 group-hover:scale-110 transition-all duration-300">
+											<service.icon className="w-5 h-5 md:w-6 md:h-6 text-white" />
 										</div>
 
-										<h3 className="text-lg font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">
+										<h3 className="text-base md:text-lg font-bold text-white mb-2 md:mb-3 group-hover:text-blue-400 transition-colors">
 											{service.title}
 										</h3>
 
-										<p className="text-gray-400 text-sm leading-relaxed mb-4 flex-grow">
+										<p className="text-gray-400 text-xs md:text-sm leading-relaxed mb-3 md:mb-4 flex-grow">
 											{service.description}
 										</p>
 
-										<div className="space-y-2 mb-4">
+										<div className="space-y-1 md:space-y-2 mb-3 md:mb-4">
 											{service.features.map((feature, index) => (
 												<div
 													key={index}
 													className="flex items-center text-gray-400"
 												>
-													<div className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></div>
+													<div className="w-1 h-1 md:w-1.5 md:h-1.5 bg-blue-500 rounded-full mr-2"></div>
 													<span className="text-xs">
 														{feature}
 													</span>
@@ -202,7 +202,7 @@ export default function AllServices() {
 										</div>
 
 										<div className="mt-auto">
-											<span className="text-gray-400 group-hover:text-blue-400 font-semibold text-sm transition-colors">
+											<span className="text-gray-400 group-hover:text-blue-400 font-semibold text-xs md:text-sm transition-colors">
 												Learn More →
 											</span>
 										</div>
