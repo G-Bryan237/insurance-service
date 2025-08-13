@@ -61,7 +61,7 @@ export function Blog() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
           {blogPosts.map((post) => (
             <Link key={post.id} href={`/blog/${post.slug}`}>
               <article className="group cursor-pointer">
@@ -79,9 +79,9 @@ export function Blog() {
                   </div>
 
                   {/* Blog content */}
-                  <div className="p-8">
+                  <div className="p-4 md:p-8">
                     {/* Meta information */}
-                    <div className="flex items-center space-x-4 text-sm text-gray-500 mb-4">
+                    <div className="flex items-center space-x-2 md:space-x-4 text-xs md:text-sm text-gray-500 mb-2 md:mb-4">
                       <div className="flex items-center space-x-1">
                         <Calendar className="w-4 h-4" />
                         <span>{post.date}</span>
@@ -93,21 +93,21 @@ export function Blog() {
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
+                    <h3 className="text-base md:text-xl font-bold text-gray-900 mb-2 md:mb-3 group-hover:text-blue-600 transition-colors line-clamp-2">
                       {post.title}
                     </h3>
 
                     {/* Excerpt */}
-                    <p className="text-gray-600 leading-relaxed mb-4 line-clamp-3">
+                    <p className="text-xs md:text-base text-gray-600 leading-relaxed mb-2 md:mb-4 line-clamp-3">
                       {post.excerpt}
                     </p>
 
                     {/* Read more */}
                     <div className="flex items-center justify-between">
-                      <span className="text-blue-600 font-semibold hover:text-blue-700 transition-colors">
+                      <span className="text-blue-600 font-semibold hover:text-blue-700 transition-colors text-xs md:text-base">
                         Read More
                       </span>
-                      <span className="text-sm text-gray-500">{post.readTime}</span>
+                      <span className="text-xs md:text-sm text-gray-500">{post.readTime}</span>
                     </div>
                   </div>
                 </div>
