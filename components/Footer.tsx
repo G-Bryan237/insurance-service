@@ -53,9 +53,9 @@ export function Footer() {
     <footer className="bg-blue-900 text-white">
       {/* Main footer content */}
       <div className="container mx-auto px-4 py-16">
-        <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company info */}
-          <div className="space-y-6">
+          <div className="space-y-6 col-span-2 md:col-span-1">
             <div>
               <h3 className="text-2xl font-bold mb-4">Insur</h3>
               <p className="text-blue-200 leading-relaxed">
