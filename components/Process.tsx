@@ -116,15 +116,23 @@ export function Process() {
           </div>
 
           {/* Mobile/tablet grid layout */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:hidden gap-6 lg:gap-8">
+          <div className="grid grid-cols-2 gap-6 lg:hidden">
             {steps.map((step, index) => (
-              <div key={index} className="text-center group">
-                <div className="relative mb-6 lg:mb-8">
+              <div
+                key={index}
+                className={`
+                  text-center group
+                  ${index === 0 ? "justify-self-start" : ""}
+                  ${index === 1 ? "justify-self-end" : ""}
+                  ${index === 2 ? "justify-self-end" : ""}
+                  ${index === 3 ? "justify-self-start" : ""}
+                `}
+              >
+                <div className="relative mb-6 lg:mb-8 flex flex-col items-center">
                   {/* Step number */}
                   <div className="text-6xl lg:text-8xl font-bold text-blue-100 mb-4 group-hover:text-blue-200 transition-colors">
                     {step.number}
                   </div>
-                  
                   {/* Icon */}
                   <div className="absolute top-4 lg:top-6 left-1/2 transform -translate-x-1/2">
                     <div className="w-12 h-12 lg:w-16 lg:h-16 bg-blue-600 rounded-full flex items-center justify-center group-hover:bg-blue-700 transition-colors">
@@ -132,7 +140,6 @@ export function Process() {
                     </div>
                   </div>
                 </div>
-
                 <h3 className="text-lg lg:text-xl font-bold text-gray-900 mb-3 lg:mb-4 group-hover:text-blue-600 transition-colors">
                   {step.title}
                 </h3>
