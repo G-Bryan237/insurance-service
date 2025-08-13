@@ -107,7 +107,7 @@ export function Services() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
           {services.map((service, index) => (
             <Link key={index} href={`/services/${service.slug}`}>
               <div className="group cursor-pointer h-full">
